@@ -1,6 +1,7 @@
 package com.heymom.backend.entity.activity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,18 +9,22 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.heymom.backend.entity.BaseEntity;
+import com.heymom.backend.entity.user.Kid;
 
 @Entity
 @Table(name = "activity")
 public class Activity extends BaseEntity {
 	private Integer attendeeMaxAge;
 	private Integer attendeeMinAge;
+	private List<Kid> attendees;
 	private Location city;
 	private Location country;
 	private Date endTime;
@@ -33,7 +38,6 @@ public class Activity extends BaseEntity {
 	private ActivityProvider provider;
 	private Location province;
 	private Date startTime;
-
 	private Integer type;
 
 	@Column(name = "attendee_max_age", precision = 3, scale = 0)
@@ -44,6 +48,12 @@ public class Activity extends BaseEntity {
 	@Column(name = "attendee_min_age", precision = 3, scale = 0)
 	public Integer getAttendeeMinAge() {
 		return attendeeMinAge;
+	}
+
+	@ManyToMany
+	@JoinTable(name = "activity_kid_map", joinColumns = { @JoinColumn(name = "activity_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "kid_id", referencedColumnName = "id") })
+	public List<Kid> getAttendees() {
+		return attendees;
 	}
 
 	@ManyToOne
@@ -130,6 +140,10 @@ public class Activity extends BaseEntity {
 
 	public void setAttendeeMinAge(Integer attendeeMinAge) {
 		this.attendeeMinAge = attendeeMinAge;
+	}
+
+	public void setAttendees(List<Kid> attendees) {
+		this.attendees = attendees;
 	}
 
 	public void setCity(Location city) {
