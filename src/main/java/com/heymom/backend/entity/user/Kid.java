@@ -10,28 +10,30 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.heymom.backend.entity.BaseEntity;
-import com.heymom.backend.entity.activity.Activity;
+import com.heymom.backend.entity.activity.ActivityAttendeeRecord;
 
 @Entity
 @Table(name = "kid")
 public class Kid extends BaseEntity {
-	private List<Activity> attendActivities;
+	private List<ActivityAttendeeRecord> attendRecords;
 	private Date birthday;
 	private Integer gender;
 	private Long id;
+	private String image;
 	private String name;
+	private String nickName;
 	private User parent;
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "attendees")
-	public List<Activity> getAttendActivities() {
-		return attendActivities;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "kid")
+	public List<ActivityAttendeeRecord> getAttendRecords() {
+		return attendRecords;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -52,9 +54,19 @@ public class Kid extends BaseEntity {
 		return id;
 	}
 
+	@Column(name = "image", length = 150)
+	public String getImage() {
+		return image;
+	}
+
 	@Column(name = "name", length = 50)
 	public String getName() {
 		return name;
+	}
+
+	@Column(name = "nick_name", length = 50)
+	public String getNickName() {
+		return nickName;
 	}
 
 	@ManyToOne
@@ -63,8 +75,8 @@ public class Kid extends BaseEntity {
 		return parent;
 	}
 
-	public void setAttendActivities(List<Activity> attendActivities) {
-		this.attendActivities = attendActivities;
+	public void setAttendRecords(List<ActivityAttendeeRecord> attendRecords) {
+		this.attendRecords = attendRecords;
 	}
 
 	public void setBirthday(Date birthday) {
@@ -79,8 +91,16 @@ public class Kid extends BaseEntity {
 		this.id = id;
 	}
 
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 
 	public void setParent(User parent) {

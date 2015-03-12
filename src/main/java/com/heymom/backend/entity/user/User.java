@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,10 +14,14 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.heymom.backend.entity.BaseEntity;
+import com.heymom.backend.entity.activity.ActivityAttendeeRecord;
+import com.heymom.backend.entity.incentive.CouponReceiveRecord;
 
 @Entity
 @Table(name = "user")
 public class User extends BaseEntity {
+	private List<ActivityAttendeeRecord> attendRecords;
+	private List<CouponReceiveRecord> couponReceiveRecords;
 	private String email;
 	private Integer gender;
 	private Long id;
@@ -25,6 +30,16 @@ public class User extends BaseEntity {
 	private String name;
 	private String password;
 	private UserInfo userInfo;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	public List<ActivityAttendeeRecord> getAttendRecords() {
+		return attendRecords;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	public List<CouponReceiveRecord> getCouponReceiveRecords() {
+		return couponReceiveRecords;
+	}
 
 	@Column(name = "email", unique = true, length = 50)
 	public String getEmail() {
@@ -43,7 +58,7 @@ public class User extends BaseEntity {
 		return id;
 	}
 
-	@OneToMany(mappedBy = "parent")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parent")
 	public List<Kid> getKids() {
 		return kids;
 	}
@@ -67,6 +82,14 @@ public class User extends BaseEntity {
 	@PrimaryKeyJoinColumn
 	public UserInfo getUserInfo() {
 		return userInfo;
+	}
+
+	public void setAttendRecords(List<ActivityAttendeeRecord> attendRecords) {
+		this.attendRecords = attendRecords;
+	}
+
+	public void setCouponReceiveRecords(List<CouponReceiveRecord> couponReceiveRecords) {
+		this.couponReceiveRecords = couponReceiveRecords;
 	}
 
 	public void setEmail(String email) {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.heymom.backend.entity.BaseEntity;
+import com.heymom.backend.entity.incentive.Coupon;
 
 @Entity
 @Table(name = "activity_provider")
@@ -20,11 +22,12 @@ public class ActivityProvider extends BaseEntity {
 	private List<Activity> activities;
 	private Location city;
 	private Location country;
+	private List<Coupon> coupons;
 	private Integer id;
 	private String name;
 	private Location province;
 
-	@OneToMany(mappedBy = "provider")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "provider")
 	public List<Activity> getActivities() {
 		return activities;
 	}
@@ -39,6 +42,11 @@ public class ActivityProvider extends BaseEntity {
 	@JoinColumn(name = "country_id")
 	public Location getCountry() {
 		return country;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "provider")
+	public List<Coupon> getCoupons() {
+		return coupons;
 	}
 
 	@Id
@@ -69,6 +77,10 @@ public class ActivityProvider extends BaseEntity {
 
 	public void setCountry(Location country) {
 		this.country = country;
+	}
+
+	public void setCoupons(List<Coupon> coupons) {
+		this.coupons = coupons;
 	}
 
 	public void setId(Integer id) {
