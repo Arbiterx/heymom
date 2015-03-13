@@ -63,7 +63,7 @@ public class User extends BaseEntity {
 		return kids;
 	}
 
-	@Column(name = "mobile", unique = true, length = 50)
+	@Column(name = "mobile", unique = true, length = 20)
 	public String getMobile() {
 		return mobile;
 	}
