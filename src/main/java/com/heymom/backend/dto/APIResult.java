@@ -3,10 +3,16 @@ package com.heymom.backend.dto;
 public class APIResult<T> {
 	private T body;
 	private int returnCode = 0;
-	private String trackId;
+	private String stackTrace;
 
 	public APIResult() {
 		super();
+	}
+
+	public APIResult(int returnCode, String stackTrace) {
+		super();
+		this.returnCode = returnCode;
+		this.stackTrace = stackTrace;
 	}
 
 	public APIResult(T body) {
@@ -22,8 +28,8 @@ public class APIResult<T> {
 		return returnCode;
 	}
 
-	public String getTrackId() {
-		return trackId;
+	public String getStackTrace() {
+		return stackTrace;
 	}
 
 	public void setBody(T body) {
@@ -34,8 +40,8 @@ public class APIResult<T> {
 		this.returnCode = returnCode;
 	}
 
-	public void setTrackId(String trackId) {
-		this.trackId = trackId;
+	public void setStackTrace(String stackTrace) {
+		this.stackTrace = stackTrace;
 	}
 
 }

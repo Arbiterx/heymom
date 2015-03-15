@@ -19,22 +19,29 @@ import com.heymom.backend.utils.RandomUtil;
 
 @Service
 public class UserService {
-	@Value("max.send.mobile.verification.code.count")
-	private static int maxSendMobileVerificationCodeCount;
+	@Value("${max.send.mobile.verification.code.count}")
+	private int maxSendMobileVerificationCodeCount;
 	@Autowired
 	private MobileVerificationRecordDao mobileVerificationRecordDao;
 	@Autowired
 	private UserDao userDao;
 
 	@Transactional
-	public long createUser(UserDto dto, String mobileCode) {
-		if (StringUtils.isEmpty(mobileCode) && StringUtils.isEmpty(dto.getMobile())) {
+	public long createUser(String mobile, String verificationCode) {
+		UserDto dto = new UserDto();
+		dto.setMobile(mobile);
+		return createUser(dto, verificationCode);
+	}
+
+	@Transactional
+	public long createUser(UserDto dto, String verificationCode) {
+		if (StringUtils.isEmpty(verificationCode) && StringUtils.isEmpty(dto.getMobile())) {
 			throw new HeymomException(100004);
 		}
 		isMobileExist(dto.getMobile());
 
 		hasSentMaxTimes(dto.getMobile());
-		if (!mobileVerificationRecordDao.findByMobileandCode(dto.getMobile(), mobileCode)) {
+		if (mobileVerificationRecordDao.findByMobileandCode(dto.getMobile(), verificationCode) == 0) {
 			throw new HeymomException(100003);
 		}
 		User entity = dto.toEntity();
