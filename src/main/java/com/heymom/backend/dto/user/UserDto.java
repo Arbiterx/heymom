@@ -1,4 +1,4 @@
-package com.heymom.backend.dto;
+package com.heymom.backend.dto.user;
 
 import org.springframework.beans.BeanUtils;
 

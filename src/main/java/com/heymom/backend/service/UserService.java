@@ -12,7 +12,7 @@ import org.springframework.util.StringUtils;
 import com.heymom.backend.common.HeymomException;
 import com.heymom.backend.dao.MobileVerificationRecordDao;
 import com.heymom.backend.dao.UserDao;
-import com.heymom.backend.dto.UserDto;
+import com.heymom.backend.dto.user.UserDto;
 import com.heymom.backend.entity.user.MobileVerificationRecord;
 import com.heymom.backend.entity.user.User;
 import com.heymom.backend.utils.RandomUtil;

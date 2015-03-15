@@ -19,8 +19,6 @@
           http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
 	<context:property-placeholder location="classpath:back-end.properties" />
-	<mvc:annotation-driven />
-	<mvc:resources location="/static/img/" mapping="/static/img/**" />
 
 	<context:annotation-config />
 

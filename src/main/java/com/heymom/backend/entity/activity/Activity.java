@@ -107,7 +107,7 @@ public class Activity extends BaseEntity {
 		return maxAttedneeCount;
 	}
 
-	@Column(name = "name", length = 50)
+	@Column(name = "name", length = 50, nullable = false)
 	public String getName() {
 		return name;
 	}
