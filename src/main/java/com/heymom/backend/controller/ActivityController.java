@@ -24,6 +24,6 @@ public class ActivityController {
 			@RequestParam(defaultValue = "DESC") String sortDirection) {
 		Page<ActivityDto> page = activityService.listAvaliableActivities(currentPage, pageSize, sortProperty,
 				sortDirection);
-		return new ModelAndView("backend/list-activities", "page", page);
+		return new ModelAndView("list-activities", "page", page);
 	}
 }
