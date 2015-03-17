@@ -18,11 +18,12 @@ public class UserAPIController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = "/{mobile}/{verificationCode}", method = RequestMethod.POST)
+	@RequestMapping(value = "/{mobile}/{verificationCode}/{password}", method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public APIResult<Integer> createUser(@PathVariable String mobile, @PathVariable String verificationCode) {
-		userService.createUser(mobile, verificationCode);
+	public APIResult<Integer> createUser(@PathVariable String mobile, @PathVariable String verificationCode,
+			@PathVariable String password) {
+		userService.createUser(mobile, verificationCode, password);
 		return new APIResult<Integer>(0);
 	}
 

@@ -27,23 +27,22 @@ public class UserService {
 	private UserDao userDao;
 
 	@Transactional
-	public long createUser(String mobile, String verificationCode) {
+	public long createUser(String mobile, String verificationCode, String password) {
 		UserDto dto = new UserDto();
 		dto.setMobile(mobile);
+		dto.setPassword(password);
 		return createUser(dto, verificationCode);
 	}
 
 	@Transactional
 	public long createUser(UserDto dto, String verificationCode) {
-		if (StringUtils.isEmpty(verificationCode) && StringUtils.isEmpty(dto.getMobile())) {
+		if (StringUtils.isEmpty(verificationCode) && StringUtils.isEmpty(dto.getMobile()))
 			throw new HeymomException(100004);
-		}
 		isMobileExist(dto.getMobile());
 
 		hasSentMaxTimes(dto.getMobile());
-		if (mobileVerificationRecordDao.findByMobileandCode(dto.getMobile(), verificationCode) == 0) {
+		if (mobileVerificationRecordDao.findByMobileandCode(dto.getMobile(), verificationCode) == 0)
 			throw new HeymomException(100003);
-		}
 		User entity = dto.toEntity();
 		userDao.save(entity);
 
@@ -54,22 +53,19 @@ public class UserService {
 		Date startTime = new DateTime().toLocalDate().toDate();
 		Date endTime = new DateTime().toLocalDate().plusDays(1).toDate();
 		int count = mobileVerificationRecordDao.countByMobileandCreateTime(mobile, startTime, endTime);
-		if (count > maxSendMobileVerificationCodeCount) {
+		if (count > maxSendMobileVerificationCodeCount)
 			throw new HeymomException(100002);
-		}
 	}
 
 	private void isMobileExist(String mobile) {
-		if (userDao.findByMobile(mobile) != null) {
+		if (userDao.findByMobile(mobile) != null)
 			throw new HeymomException(100001);
-		}
 	}
 
 	@Transactional
 	public void sendMobileVerification(String mobile) {
-		if (StringUtils.isEmpty(mobile)) {
+		if (StringUtils.isEmpty(mobile))
 			throw new HeymomException(100004);
-		}
 		isMobileExist(mobile);
 		hasSentMaxTimes(mobile);
 		mobileVerificationRecordDao.save(new MobileVerificationRecord(RandomUtil.generate6Int(), mobile));
