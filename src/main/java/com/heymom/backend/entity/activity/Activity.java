@@ -31,13 +31,16 @@ public class Activity extends BaseEntity {
 	private List<Coupon> coupons;
 	private Date endTime;
 	private Integer id;
+	private String image;
 	private Integer InitialAttendeeCount;
 	private double latitude;
 	private double longitude;
 	private Integer maxAttedneeCount;
 	private String name;
 	private float price;
+
 	private ActivityProvider provider;
+
 	private Location province;
 	private Date startTime;
 	private Integer type;
@@ -85,6 +88,11 @@ public class Activity extends BaseEntity {
 	@Column(name = "id", unique = true, nullable = false, precision = 10, scale = 0)
 	public Integer getId() {
 		return id;
+	}
+
+	@Column(name = "image", length = 150)
+	public String getImage() {
+		return image;
 	}
 
 	@Column(name = "initial_attendee_count", precision = 4, scale = 0)
@@ -170,6 +178,10 @@ public class Activity extends BaseEntity {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public void setInitialAttendeeCount(Integer initialAttendeeCount) {
