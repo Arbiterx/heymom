@@ -9,14 +9,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 
+import com.heymom.backend.dto.DeliveryDto;
 import com.heymom.backend.dto.activity.ActivityDto;
 import com.heymom.backend.dto.user.UserDto;
+import com.heymom.backend.entity.Delivery;
 import com.heymom.backend.entity.activity.Activity;
 import com.heymom.backend.entity.user.User;
 
 public class DtoUtils<CDTO, CEntity> {
 	public static DtoUtils<ActivityDto, Activity> activityDtoUtil = new DtoUtils<ActivityDto, Activity>(
 			ActivityDto.class, Activity.class);
+	public static DtoUtils<DeliveryDto, Delivery> deliveryDtoUtil = new DtoUtils<DeliveryDto, Delivery>(
+			DeliveryDto.class, Delivery.class);
 	private static final Logger logger = LoggerFactory.getLogger(DtoUtils.class);
 	public static DtoUtils<UserDto, User> userDtoUtil = new DtoUtils<UserDto, User>(UserDto.class, User.class);
 	private Class<?> dtoClass;

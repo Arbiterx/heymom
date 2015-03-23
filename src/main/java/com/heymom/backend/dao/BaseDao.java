@@ -39,6 +39,14 @@ public interface BaseDao<T, ID extends Serializable> extends Repository<T, ID> {
 	void deleteAll();
 
 	/**
+	 * Returns all instances of the type with the given IDs.
+	 *
+	 * @param ids
+	 * @return
+	 */
+	Iterable<T> findAll(Iterable<ID> ids);
+
+	/**
 	 * Retrieves an entity by its id.
 	 *
 	 * @param id

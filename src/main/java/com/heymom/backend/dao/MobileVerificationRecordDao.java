@@ -13,5 +13,5 @@ public interface MobileVerificationRecordDao extends BaseDao<MobileVerificationR
 			@Param("endTime") Date endTime);
 
 	@Query("select count(*) from MobileVerificationRecord where status>=0 and mobile =:mobile and code=:code")
-	public long findByMobileandCode(@Param("mobile") String mobile, @Param("code") String code);
+	public long countByMobileandCode(@Param("mobile") String mobile, @Param("code") String code);
 }

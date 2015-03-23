@@ -41,7 +41,7 @@ public class UserService {
 		isMobileExist(dto.getMobile());
 
 		hasSentMaxTimes(dto.getMobile());
-		if (mobileVerificationRecordDao.findByMobileandCode(dto.getMobile(), verificationCode) == 0)
+		if (mobileVerificationRecordDao.countByMobileandCode(dto.getMobile(), verificationCode) == 0)
 			throw new HeymomException(100003);
 		User entity = dto.toEntity();
 		userDao.save(entity);

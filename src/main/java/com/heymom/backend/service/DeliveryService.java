@@ -1,5 +1,7 @@
 package com.heymom.backend.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -8,21 +10,27 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.heymom.backend.dao.ActivityDao;
-import com.heymom.backend.dto.activity.ActivityDto;
-import com.heymom.backend.entity.activity.Activity;
+import com.heymom.backend.dao.DeliveryDao;
+import com.heymom.backend.dto.DeliveryDto;
+import com.heymom.backend.entity.Delivery;
 import com.heymom.backend.utils.DtoUtils;
 
 @Service
-public class ActivityService {
+public class DeliveryService {
 	@Autowired
-	private ActivityDao activityDao;
+	private DeliveryDao deliveryDao;
 
 	@Transactional(readOnly = true)
-	public Page<ActivityDto> listAvaliableActivities(int currentPage, int pageSize, String sortProperty,
+	public Page<DeliveryDto> listAvaliableDeliveries(int currentPage, int pageSize, String sortProperty,
 			String sortDirection) {
 		Pageable pageRequest = new PageRequest(currentPage, pageSize, Direction.fromString(sortDirection), sortProperty);
-		Page<Activity> activties = activityDao.listAvaliableActivities(pageRequest);
-		return DtoUtils.activityDtoUtil.toDTO(activties);
+		Page<Delivery> deliveries = deliveryDao.listAll(pageRequest);
+		return DtoUtils.deliveryDtoUtil.toDTO(deliveries);
 	}
+
+	@Transactional(readOnly = true)
+	public List<DeliveryDto> listByIds(Iterable<Integer> ids) {
+		return DtoUtils.deliveryDtoUtil.toDTO(deliveryDao.listByIds(ids));
+	}
+
 }
