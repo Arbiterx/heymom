@@ -28,7 +28,7 @@ public class DeliveryAPIController {
 	@ResponseBody
 	public List<DeliveryDto> listActivities(@RequestParam(defaultValue = "0") int currentPage,
 			@RequestParam(defaultValue = "10") int pageSize,
-			@RequestParam(defaultValue = "createTime") String sortProperty,
+			@RequestParam(defaultValue = "hotPriority") String sortProperty,
 			@RequestParam(defaultValue = "DESC") String sortDirection) {
 		Page<DeliveryDto> page = deliveryService.listAvaliableDeliveries(currentPage, pageSize, sortProperty,
 				sortDirection);
