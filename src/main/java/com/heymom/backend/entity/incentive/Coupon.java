@@ -36,7 +36,7 @@ public class Coupon extends BaseEntity {
 	private List<CouponReceiveRecord> receiveRecords;
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "activity_coupon", joinColumns = { @JoinColumn(name = "activity_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "coupon_id", referencedColumnName = "id") })
+	@JoinTable(name = "activity_coupon", joinColumns = { @JoinColumn(name = "coupon_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "activity_id", referencedColumnName = "id") })
 	public List<Activity> getActivities() {
 		return activities;
 	}
