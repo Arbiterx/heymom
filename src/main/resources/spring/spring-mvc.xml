@@ -19,7 +19,7 @@
           http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
 	<mvc:annotation-driven />
-	<mvc:resources location="/static/img/" mapping="/static/img/**" />
+	<mvc:resources location="/static/" mapping="/static/**" />
 
 	<!-- ViewResolver & View Ó³Éä¹ØÏµ -->
 	<bean
