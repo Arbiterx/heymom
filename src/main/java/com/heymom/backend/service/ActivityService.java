@@ -19,6 +19,11 @@ public class ActivityService {
 	private ActivityDao activityDao;
 
 	@Transactional(readOnly = true)
+	public ActivityDto findOne(Integer id) {
+		return new ActivityDto(activityDao.findOne(id));
+	}
+
+	@Transactional(readOnly = true)
 	public Page<ActivityDto> listAvaliableActivities(int currentPage, int pageSize, String sortProperty,
 			String sortDirection) {
 		Pageable pageRequest = new PageRequest(currentPage, pageSize, Direction.fromString(sortDirection), sortProperty);

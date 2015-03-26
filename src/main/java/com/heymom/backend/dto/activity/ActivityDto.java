@@ -1,5 +1,6 @@
 package com.heymom.backend.dto.activity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.BeanUtils;
 
 import com.heymom.backend.dto.incentive.CouponDto;
 import com.heymom.backend.entity.activity.Activity;
+import com.heymom.backend.entity.activity.ActivityAttendeeRecord;
 
 public class ActivityDto {
 	private Integer attendeeMaxAge;
@@ -45,6 +47,12 @@ public class ActivityDto {
 		}
 		if (entity.getProvider() != null) {
 			provider = new ActivityProviderDto(entity.getProvider());
+		}
+		if (entity.getAttendRecords() != null) {
+			attendRecords = new ArrayList<ActivityAttendeeRecordDto>();
+			for (ActivityAttendeeRecord activityAttendeeRecord : entity.getAttendRecords()) {
+				attendRecords.add(new ActivityAttendeeRecordDto(activityAttendeeRecord));
+			}
 		}
 
 	}

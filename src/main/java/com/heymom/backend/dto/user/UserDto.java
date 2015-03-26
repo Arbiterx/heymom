@@ -12,6 +12,13 @@ public class UserDto {
 	private String name;
 	private String password;
 
+	public UserDto() {
+	}
+
+	public UserDto(User entity) {
+		BeanUtils.copyProperties(entity, this);
+	}
+
 	public String getEmail() {
 		return email;
 	}

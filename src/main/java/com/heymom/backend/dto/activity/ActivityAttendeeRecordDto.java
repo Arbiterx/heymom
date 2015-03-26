@@ -1,6 +1,9 @@
 package com.heymom.backend.dto.activity;
 
+import org.springframework.beans.BeanUtils;
+
 import com.heymom.backend.dto.user.UserDto;
+import com.heymom.backend.entity.activity.ActivityAttendeeRecord;
 import com.heymom.backend.entity.user.Kid;
 
 public class ActivityAttendeeRecordDto {
@@ -10,6 +13,16 @@ public class ActivityAttendeeRecordDto {
 	private Kid kid;
 	private Integer score;
 	private UserDto user;
+
+	public ActivityAttendeeRecordDto() {
+	}
+
+	public ActivityAttendeeRecordDto(ActivityAttendeeRecord entity) {
+		BeanUtils.copyProperties(entity, this);
+		if (entity.getUser() != null) {
+			user = new UserDto(entity.getUser());
+		}
+	}
 
 	public ActivityDto getActivity() {
 		return activity;
@@ -57,5 +70,14 @@ public class ActivityAttendeeRecordDto {
 
 	public void setUser(UserDto user) {
 		this.user = user;
+	}
+
+	public ActivityAttendeeRecord toEntity() {
+		ActivityAttendeeRecord entity = new ActivityAttendeeRecord();
+		BeanUtils.copyProperties(this, entity);
+		if (user != null) {
+			entity.setUser(user.toEntity());
+		}
+		return entity;
 	}
 }
