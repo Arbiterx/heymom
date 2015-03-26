@@ -34,7 +34,7 @@ public class ActivityAPIController {
 	@ResponseBody
 	public List<ActivityDto> listActivities(@RequestParam(defaultValue = "0") int currentPage,
 			@RequestParam(defaultValue = "10") int pageSize,
-			@RequestParam(defaultValue = "hotPriority") String sortProperty,
+			@RequestParam(defaultValue = "createTime") String sortProperty,
 			@RequestParam(defaultValue = "DESC") String sortDirection) {
 		Page<ActivityDto> page = activityService.listAvaliableActivities(currentPage, pageSize, sortProperty,
 				sortDirection);
