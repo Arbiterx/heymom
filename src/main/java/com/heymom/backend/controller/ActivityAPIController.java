@@ -26,7 +26,7 @@ public class ActivityAPIController {
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
 	public ActivityDto findOne(@PathVariable Integer id) {
-		return activityService.findOne(id);
+		return activityService.findOneActivity(id);
 	}
 
 	@RequestMapping(value = "listpage", method = RequestMethod.GET)
@@ -37,7 +37,7 @@ public class ActivityAPIController {
 			@RequestParam(defaultValue = "createTime") String sortProperty,
 			@RequestParam(defaultValue = "DESC") String sortDirection) {
 		Page<ActivityDto> page = activityService.listAvaliableActivities(currentPage, pageSize, sortProperty,
-				sortDirection);
+				sortDirection, null, null, null, null, null);
 		return page.getContent();
 	}
 }
