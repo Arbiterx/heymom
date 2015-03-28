@@ -30,6 +30,7 @@ public class User extends BaseEntity {
 	private String name;
 	private String password;
 	private UserInfo userInfo;
+	private String userToken;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	public List<ActivityAttendeeRecord> getAttendRecords() {
@@ -84,6 +85,11 @@ public class User extends BaseEntity {
 		return userInfo;
 	}
 
+	@Column(name = "token", length = 36)
+	public String getUserToken() {
+		return userToken;
+	}
+
 	public void setAttendRecords(List<ActivityAttendeeRecord> attendRecords) {
 		this.attendRecords = attendRecords;
 	}
@@ -122,6 +128,10 @@ public class User extends BaseEntity {
 
 	public void setUserInfo(UserInfo userInfo) {
 		this.userInfo = userInfo;
+	}
+
+	public void setUserToken(String userToken) {
+		this.userToken = userToken;
 	}
 
 }

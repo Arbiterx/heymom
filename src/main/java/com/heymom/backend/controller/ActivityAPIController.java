@@ -6,34 +6,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.heymom.backend.common.LoginRequired;
 import com.heymom.backend.dto.APIResult;
 import com.heymom.backend.dto.activity.ActivityAttendeeRecordDto;
 import com.heymom.backend.dto.activity.ActivityDto;
 import com.heymom.backend.service.ActivityService;
 
 @Controller
-@RequestMapping("/api/question/")
+@RequestMapping("/api/activity/")
 public class ActivityAPIController {
 	@Autowired
 	private ActivityService activityService;
 
-	@RequestMapping(value = "addfavour", method = RequestMethod.POST)
+	@RequestMapping(value = "attend/{activityId}", method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public APIResult<Integer> addfavour(@PathVariable Integer activityId) {
-		// TODO
-		return new APIResult<Integer>(0);
-	}
-
-	@RequestMapping(value = "attend", method = RequestMethod.POST)
-	@ResponseStatus(value = HttpStatus.OK)
-	@ResponseBody
-	public List<ActivityDto> attend(@PathVariable Integer activityId) {
+	@LoginRequired
+	public List<ActivityDto> attend(@PathVariable Integer activityId, @RequestHeader("token") String userToken) {
 		// TODO
 		return null;
 	}
@@ -46,15 +41,15 @@ public class ActivityAPIController {
 		return new APIResult<Integer>(0);
 	}
 
-	@RequestMapping(value = "cancelfavour", method = RequestMethod.PUT)
+	@RequestMapping(value = "cancelFollow", method = RequestMethod.PUT)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public APIResult<Integer> cancelFavour(@PathVariable Integer activityId) {
+	public APIResult<Integer> cancelFollow(@PathVariable Integer activityId) {
 		// TODO
 		return new APIResult<Integer>(0);
 	}
 
-	@RequestMapping(value = "deletemyattended", method = RequestMethod.DELETE)
+	@RequestMapping(value = "deleteMyAttended", method = RequestMethod.DELETE)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
 	public APIResult<Integer> deleteMyAttended() {
@@ -62,10 +57,10 @@ public class ActivityAPIController {
 		return new APIResult<Integer>(0);
 	}
 
-	@RequestMapping(value = "deletemyfavour", method = RequestMethod.DELETE)
+	@RequestMapping(value = "deleteMyFollowed", method = RequestMethod.DELETE)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public APIResult<Integer> deleteMyFavour() {
+	public APIResult<Integer> deleteMyFollowed() {
 		// TODO
 		return new APIResult<Integer>(0);
 	}
@@ -78,7 +73,15 @@ public class ActivityAPIController {
 		return new APIResult<Integer>(0);
 	}
 
-	@RequestMapping(value = "listallavailableactivities", method = RequestMethod.GET)
+	@RequestMapping(value = "follow", method = RequestMethod.POST)
+	@ResponseStatus(value = HttpStatus.OK)
+	@ResponseBody
+	public APIResult<Integer> follow(@PathVariable Integer activityId) {
+		// TODO
+		return new APIResult<Integer>(0);
+	}
+
+	@RequestMapping(value = "listAllAvailableActivities", method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
 	public List<ActivityDto> listAllAvailableActivities() {
@@ -86,22 +89,22 @@ public class ActivityAPIController {
 		return null;
 	}
 
-	@RequestMapping(value = "listbyids", method = RequestMethod.GET)
+	@RequestMapping(value = "listByIds", method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
 	public List<ActivityDto> listByIds(@PathVariable List<Integer> ids) {
 		return activityService.listByIds(ids);
 	}
 
-	@RequestMapping(value = "listfeedback", method = RequestMethod.GET)
+	@RequestMapping(value = "listFeedBack", method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public List<ActivityDto> listfeedback(@PathVariable Integer activityId) {
+	public List<ActivityDto> listFeedBack(@PathVariable Integer activityId) {
 		// TODO
 		return null;
 	}
 
-	@RequestMapping(value = "listmyactivity", method = RequestMethod.GET)
+	@RequestMapping(value = "listMyActivity", method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
 	public List<ActivityDto> listMyActivity() {
@@ -109,18 +112,18 @@ public class ActivityAPIController {
 		return null;
 	}
 
-	@RequestMapping(value = "listmyfavour", method = RequestMethod.GET)
+	@RequestMapping(value = "listMyFeedback", method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public List<ActivityDto> listMyFavour() {
+	public List<ActivityDto> listMyFeedback() {
 		// TODO
 		return null;
 	}
 
-	@RequestMapping(value = "listmyfeedback", method = RequestMethod.GET)
+	@RequestMapping(value = "listMyFollowed", method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public List<ActivityDto> listMyFeedback() {
+	public List<ActivityDto> listMyFollowed() {
 		// TODO
 		return null;
 	}

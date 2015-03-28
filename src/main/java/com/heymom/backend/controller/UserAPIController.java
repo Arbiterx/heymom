@@ -1,5 +1,8 @@
 package com.heymom.backend.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -22,10 +25,12 @@ public class UserAPIController {
 	@RequestMapping(value = "/{mobile}/{verificationCode}/{password}", method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public APIResult<Integer> createUser(@PathVariable String mobile, @PathVariable String verificationCode,
-			@PathVariable String password) {
-		userService.createUser(mobile, verificationCode, password);
-		return new APIResult<Integer>(0);
+	public APIResult<Map<String, String>> createUser(@PathVariable String mobile,
+			@PathVariable String verificationCode, @PathVariable String password) {
+		String userToken = userService.createUser(mobile, verificationCode, password);
+		Map<String, String> result = new HashMap<String, String>();
+		result.put("userToken", userToken);
+		return new APIResult<Map<String, String>>(result);
 	}
 
 	@RequestMapping(value = "/userinfo", method = RequestMethod.GET)
@@ -36,7 +41,7 @@ public class UserAPIController {
 		return null;
 	}
 
-	@RequestMapping(value = "sendmobileverification/{mobile}", method = RequestMethod.POST)
+	@RequestMapping(value = "sendMobileVerification/{mobile}", method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
 	public APIResult<Integer> sendMobileVerification(@PathVariable String mobile) {

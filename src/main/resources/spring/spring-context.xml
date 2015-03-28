@@ -85,5 +85,8 @@
 	<jpa:repositories base-package="com.heymom.backend.dao" />
 
 	<context:component-scan base-package="com.heymom.backend" />
+	
+	<aop:aspectj-autoproxy/>
+	<bean class="com.heymom.backend.common.AuthorizationAspect"/>
 
 </beans>
