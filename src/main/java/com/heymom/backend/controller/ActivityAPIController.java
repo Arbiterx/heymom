@@ -3,41 +3,126 @@ package com.heymom.backend.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.heymom.backend.dto.APIResult;
+import com.heymom.backend.dto.activity.ActivityAttendeeRecordDto;
 import com.heymom.backend.dto.activity.ActivityDto;
 import com.heymom.backend.service.ActivityService;
 
 @Controller
-@RequestMapping("/api/activity/")
+@RequestMapping("/api/question/")
 public class ActivityAPIController {
 	@Autowired
 	private ActivityService activityService;
 
-	@RequestMapping(value = "{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "addfavour", method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public ActivityDto findOne(@PathVariable Integer id) {
-		return activityService.findOneActivity(id);
+	public APIResult<Integer> addfavour(@PathVariable Integer activityId) {
+		// TODO
+		return new APIResult<Integer>(0);
 	}
 
-	@RequestMapping(value = "listpage", method = RequestMethod.GET)
+	@RequestMapping(value = "attend", method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public List<ActivityDto> listActivities(@RequestParam(defaultValue = "0") int currentPage,
-			@RequestParam(defaultValue = "10") int pageSize,
-			@RequestParam(defaultValue = "createTime") String sortProperty,
-			@RequestParam(defaultValue = "DESC") String sortDirection) {
-		Page<ActivityDto> page = activityService.listAvaliableActivities(currentPage, pageSize, sortProperty,
-				sortDirection, null, null, null, null, null);
-		return page.getContent();
+	public List<ActivityDto> attend(@PathVariable Integer activityId) {
+		// TODO
+		return null;
 	}
+
+	@RequestMapping(value = "cancel", method = RequestMethod.PUT)
+	@ResponseStatus(value = HttpStatus.OK)
+	@ResponseBody
+	public APIResult<Integer> cancel(@PathVariable Integer activityId) {
+		// TODO
+		return new APIResult<Integer>(0);
+	}
+
+	@RequestMapping(value = "cancelfavour", method = RequestMethod.PUT)
+	@ResponseStatus(value = HttpStatus.OK)
+	@ResponseBody
+	public APIResult<Integer> cancelFavour(@PathVariable Integer activityId) {
+		// TODO
+		return new APIResult<Integer>(0);
+	}
+
+	@RequestMapping(value = "deletemyattended", method = RequestMethod.DELETE)
+	@ResponseStatus(value = HttpStatus.OK)
+	@ResponseBody
+	public APIResult<Integer> deleteMyAttended() {
+		// TODO
+		return new APIResult<Integer>(0);
+	}
+
+	@RequestMapping(value = "deletemyfavour", method = RequestMethod.DELETE)
+	@ResponseStatus(value = HttpStatus.OK)
+	@ResponseBody
+	public APIResult<Integer> deleteMyFavour() {
+		// TODO
+		return new APIResult<Integer>(0);
+	}
+
+	@RequestMapping(value = "feedback", method = RequestMethod.POST)
+	@ResponseStatus(value = HttpStatus.OK)
+	@ResponseBody
+	public APIResult<Integer> feedback(ActivityAttendeeRecordDto dto) {
+		// TODO
+		return new APIResult<Integer>(0);
+	}
+
+	@RequestMapping(value = "listallavailableactivities", method = RequestMethod.GET)
+	@ResponseStatus(value = HttpStatus.OK)
+	@ResponseBody
+	public List<ActivityDto> listAllAvailableActivities() {
+		// TODO 1
+		return null;
+	}
+
+	@RequestMapping(value = "listbyids", method = RequestMethod.GET)
+	@ResponseStatus(value = HttpStatus.OK)
+	@ResponseBody
+	public List<ActivityDto> listByIds(@PathVariable List<Integer> ids) {
+		return activityService.listByIds(ids);
+	}
+
+	@RequestMapping(value = "listfeedback", method = RequestMethod.GET)
+	@ResponseStatus(value = HttpStatus.OK)
+	@ResponseBody
+	public List<ActivityDto> listfeedback(@PathVariable Integer activityId) {
+		// TODO
+		return null;
+	}
+
+	@RequestMapping(value = "listmyactivity", method = RequestMethod.GET)
+	@ResponseStatus(value = HttpStatus.OK)
+	@ResponseBody
+	public List<ActivityDto> listMyActivity() {
+		// TODO
+		return null;
+	}
+
+	@RequestMapping(value = "listmyfavour", method = RequestMethod.GET)
+	@ResponseStatus(value = HttpStatus.OK)
+	@ResponseBody
+	public List<ActivityDto> listMyFavour() {
+		// TODO
+		return null;
+	}
+
+	@RequestMapping(value = "listmyfeedback", method = RequestMethod.GET)
+	@ResponseStatus(value = HttpStatus.OK)
+	@ResponseBody
+	public List<ActivityDto> listMyFeedback() {
+		// TODO
+		return null;
+	}
+
 }

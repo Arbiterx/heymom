@@ -23,10 +23,12 @@ import com.heymom.backend.entity.incentive.Coupon;
 @Entity
 @Table(name = "activity")
 public class Activity extends BaseEntity {
+	private String address;
 	private Integer attendeeMaxAge;
 	private Integer attendeeMinAge;
 	private List<ActivityAttendeeRecord> attendRecords;
 	private Location city;
+	private String contactPhone;
 	private Location country;
 	private List<Coupon> coupons;
 	private Date endTime;
@@ -42,8 +44,15 @@ public class Activity extends BaseEntity {
 	private ActivityProvider provider;
 
 	private Location province;
+
 	private Date startTime;
+
 	private Integer type;
+
+	@Column(name = "address", length = 150)
+	public String getAddress() {
+		return address;
+	}
 
 	@Column(name = "attendee_max_age", precision = 3, scale = 0)
 	public Integer getAttendeeMaxAge() {
@@ -64,6 +73,11 @@ public class Activity extends BaseEntity {
 	@JoinColumn(name = "city_id")
 	public Location getCity() {
 		return city;
+	}
+
+	@Column(name = "contact_phone", length = 50)
+	public String getContactPhone() {
+		return contactPhone;
 	}
 
 	@ManyToOne
@@ -148,6 +162,10 @@ public class Activity extends BaseEntity {
 		return type;
 	}
 
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	public void setAttendeeMaxAge(Integer attendeeMaxAge) {
 		this.attendeeMaxAge = attendeeMaxAge;
 	}
@@ -162,6 +180,10 @@ public class Activity extends BaseEntity {
 
 	public void setCity(Location city) {
 		this.city = city;
+	}
+
+	public void setContactPhone(String contactPhone) {
+		this.contactPhone = contactPhone;
 	}
 
 	public void setCountry(Location country) {

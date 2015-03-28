@@ -21,11 +21,13 @@ import com.heymom.backend.entity.incentive.Coupon;
 public class ActivityProvider extends BaseEntity {
 	private List<Activity> activities;
 	private Location city;
+	private String contactPhone;
 	private Location country;
 	private List<Coupon> coupons;
 	private Integer id;
 	private String name;
 	private Location province;
+	private Integer type;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "provider")
 	public List<Activity> getActivities() {
@@ -36,6 +38,11 @@ public class ActivityProvider extends BaseEntity {
 	@JoinColumn(name = "city_id")
 	public Location getCity() {
 		return city;
+	}
+
+	@Column(name = "contact_phone", length = 50)
+	public String getContactPhone() {
+		return contactPhone;
 	}
 
 	@ManyToOne
@@ -67,12 +74,21 @@ public class ActivityProvider extends BaseEntity {
 		return province;
 	}
 
+	@Column(name = "type", precision = 2, scale = 0)
+	public Integer getType() {
+		return type;
+	}
+
 	public void setActivities(List<Activity> activities) {
 		this.activities = activities;
 	}
 
 	public void setCity(Location city) {
 		this.city = city;
+	}
+
+	public void setContactPhone(String contactPhone) {
+		this.contactPhone = contactPhone;
 	}
 
 	public void setCountry(Location country) {
@@ -93,6 +109,10 @@ public class ActivityProvider extends BaseEntity {
 
 	public void setProvince(Location province) {
 		this.province = province;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
 	}
 
 }

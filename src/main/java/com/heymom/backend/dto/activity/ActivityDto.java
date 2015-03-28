@@ -18,6 +18,7 @@ public class ActivityDto {
 	private LocationDto country;
 	private List<CouponDto> coupons;
 	private Date endTime;
+	private Boolean hasCoupon;
 	private Integer id;
 	private Integer InitialAttendeeCount;
 	private double latitude;
@@ -36,23 +37,18 @@ public class ActivityDto {
 
 	public ActivityDto(Activity entity) {
 		BeanUtils.copyProperties(entity, this);
-		if (entity.getCity() != null) {
+		if (entity.getCity() != null)
 			city = new LocationDto(entity.getCity());
-		}
-		if (entity.getCountry() != null) {
+		if (entity.getCountry() != null)
 			country = new LocationDto(entity.getCountry());
-		}
-		if (entity.getProvince() != null) {
+		if (entity.getProvince() != null)
 			province = new LocationDto(entity.getProvince());
-		}
-		if (entity.getProvider() != null) {
+		if (entity.getProvider() != null)
 			provider = new ActivityProviderDto(entity.getProvider());
-		}
 		if (entity.getAttendRecords() != null) {
 			attendRecords = new ArrayList<ActivityAttendeeRecordDto>();
-			for (ActivityAttendeeRecord activityAttendeeRecord : entity.getAttendRecords()) {
+			for (ActivityAttendeeRecord activityAttendeeRecord : entity.getAttendRecords())
 				attendRecords.add(new ActivityAttendeeRecordDto(activityAttendeeRecord));
-			}
 		}
 
 	}
@@ -83,6 +79,10 @@ public class ActivityDto {
 
 	public Date getEndTime() {
 		return endTime;
+	}
+
+	public Boolean getHasCoupon() {
+		return hasCoupon;
 	}
 
 	public Integer getId() {
@@ -157,6 +157,10 @@ public class ActivityDto {
 		this.endTime = endTime;
 	}
 
+	public void setHasCoupon(Boolean hasCoupon) {
+		this.hasCoupon = hasCoupon;
+	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -204,18 +208,14 @@ public class ActivityDto {
 	public Activity toEntity() {
 		Activity entity = new Activity();
 		BeanUtils.copyProperties(this, entity);
-		if (city != null) {
+		if (city != null)
 			entity.setCity(city.toEntity());
-		}
-		if (country != null) {
+		if (country != null)
 			entity.setCountry(country.toEntity());
-		}
-		if (province != null) {
+		if (province != null)
 			entity.setProvince(province.toEntity());
-		}
-		if (provider != null) {
+		if (provider != null)
 			entity.setProvider(provider.toEntity());
-		}
 		return entity;
 	}
 }

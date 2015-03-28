@@ -47,6 +47,11 @@ public class ActivityService {
 		return DtoUtils.activityDtoUtil.toDTO(activties);
 	}
 
+	public List<ActivityDto> listByIds(List<Integer> ids) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Transactional
 	public void updateActivity(ActivityDto activityDto) {
 		activityDao.save(activityDto.toEntity());

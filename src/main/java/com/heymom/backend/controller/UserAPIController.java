@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.heymom.backend.dto.APIResult;
+import com.heymom.backend.dto.user.UserInfoDto;
 import com.heymom.backend.service.UserService;
 
 @Controller
@@ -27,11 +28,35 @@ public class UserAPIController {
 		return new APIResult<Integer>(0);
 	}
 
-	@RequestMapping(value = "sendMobileVerification/{mobile}", method = RequestMethod.POST)
+	@RequestMapping(value = "/userinfo", method = RequestMethod.GET)
+	@ResponseStatus(value = HttpStatus.OK)
+	@ResponseBody
+	public APIResult<UserInfoDto> findUserInfo() {
+		// TODO
+		return null;
+	}
+
+	@RequestMapping(value = "sendmobileverification/{mobile}", method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
 	public APIResult<Integer> sendMobileVerification(@PathVariable String mobile) {
 		userService.sendMobileVerification(mobile);
+		return new APIResult<Integer>(0);
+	}
+
+	@RequestMapping(value = "/{verificationCode}/{password}", method = RequestMethod.PUT)
+	@ResponseStatus(value = HttpStatus.OK)
+	@ResponseBody
+	public APIResult<Integer> updatePasword(@PathVariable String verificationCode, @PathVariable String password) {
+		// TODO
+		return new APIResult<Integer>(0);
+	}
+
+	@RequestMapping(value = "/userinfo", method = RequestMethod.PUT)
+	@ResponseStatus(value = HttpStatus.OK)
+	@ResponseBody
+	public APIResult<Integer> updateUserInfo() {
+		// TODO
 		return new APIResult<Integer>(0);
 	}
 

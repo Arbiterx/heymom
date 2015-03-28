@@ -33,7 +33,11 @@ public class Coupon extends BaseEntity {
 	private Integer maxCount;
 	private String name;
 	private ActivityProvider provider;
+
 	private List<CouponReceiveRecord> receiveRecords;
+
+	private Date startTime;
+	private Integer type;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "activity_coupon", joinColumns = { @JoinColumn(name = "coupon_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "activity_id", referencedColumnName = "id") })
@@ -84,6 +88,16 @@ public class Coupon extends BaseEntity {
 		return receiveRecords;
 	}
 
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date getStartTime() {
+		return startTime;
+	}
+
+	@Column(name = "type", precision = 2, scale = 0)
+	public Integer getType() {
+		return type;
+	}
+
 	public void setActivities(List<Activity> activities) {
 		this.activities = activities;
 	}
@@ -118,6 +132,14 @@ public class Coupon extends BaseEntity {
 
 	public void setReceiveRecords(List<CouponReceiveRecord> receiveRecords) {
 		this.receiveRecords = receiveRecords;
+	}
+
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
 	}
 
 }
