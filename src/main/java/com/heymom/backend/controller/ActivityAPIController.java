@@ -36,7 +36,8 @@ public class ActivityAPIController {
 	@RequestMapping(value = "cancel", method = RequestMethod.PUT)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public APIResult<Integer> cancel(@PathVariable Integer activityId) {
+	@LoginRequired
+	public APIResult<Integer> cancel(@PathVariable Integer activityId, @RequestHeader("token") String userToken) {
 		// TODO
 		return new APIResult<Integer>(0);
 	}
@@ -44,7 +45,8 @@ public class ActivityAPIController {
 	@RequestMapping(value = "cancelFollow", method = RequestMethod.PUT)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public APIResult<Integer> cancelFollow(@PathVariable Integer activityId) {
+	@LoginRequired
+	public APIResult<Integer> cancelFollow(@PathVariable Integer activityId, @RequestHeader("token") String userToken) {
 		// TODO
 		return new APIResult<Integer>(0);
 	}
@@ -52,7 +54,9 @@ public class ActivityAPIController {
 	@RequestMapping(value = "deleteMyAttended", method = RequestMethod.DELETE)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public APIResult<Integer> deleteMyAttended() {
+	@LoginRequired
+	public APIResult<Integer> deleteMyAttended(@PathVariable Integer activityId,
+			@RequestHeader("token") String userToken) {
 		// TODO
 		return new APIResult<Integer>(0);
 	}
@@ -60,7 +64,9 @@ public class ActivityAPIController {
 	@RequestMapping(value = "deleteMyFollowed", method = RequestMethod.DELETE)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public APIResult<Integer> deleteMyFollowed() {
+	@LoginRequired
+	public APIResult<Integer> deleteMyFollowed(@PathVariable Integer activityId,
+			@RequestHeader("token") String userToken) {
 		// TODO
 		return new APIResult<Integer>(0);
 	}
@@ -68,7 +74,8 @@ public class ActivityAPIController {
 	@RequestMapping(value = "feedback", method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public APIResult<Integer> feedback(ActivityAttendeeRecordDto dto) {
+	@LoginRequired
+	public APIResult<Integer> feedback(ActivityAttendeeRecordDto dto, @RequestHeader("token") String userToken) {
 		// TODO
 		return new APIResult<Integer>(0);
 	}
@@ -76,7 +83,8 @@ public class ActivityAPIController {
 	@RequestMapping(value = "follow", method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public APIResult<Integer> follow(@PathVariable Integer activityId) {
+	@LoginRequired
+	public APIResult<Integer> follow(@PathVariable Integer activityId, @RequestHeader("token") String userToken) {
 		// TODO
 		return new APIResult<Integer>(0);
 	}
@@ -107,7 +115,8 @@ public class ActivityAPIController {
 	@RequestMapping(value = "listMyActivity", method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public List<ActivityDto> listMyActivity() {
+	@LoginRequired
+	public List<ActivityDto> listMyActivity(@RequestHeader("token") String userToken) {
 		// TODO
 		return null;
 	}
@@ -115,7 +124,8 @@ public class ActivityAPIController {
 	@RequestMapping(value = "listMyFeedback", method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public List<ActivityDto> listMyFeedback() {
+	@LoginRequired
+	public List<ActivityDto> listMyFeedback(@RequestHeader("token") String userToken) {
 		// TODO
 		return null;
 	}
@@ -123,7 +133,8 @@ public class ActivityAPIController {
 	@RequestMapping(value = "listMyFollowed", method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public List<ActivityDto> listMyFollowed() {
+	@LoginRequired
+	public List<ActivityDto> listMyFollowed(@RequestHeader("token") String userToken) {
 		// TODO
 		return null;
 	}

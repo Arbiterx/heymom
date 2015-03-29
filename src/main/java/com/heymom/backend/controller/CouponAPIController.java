@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.heymom.backend.common.LoginRequired;
 import com.heymom.backend.dto.incentive.CouponDto;
 import com.heymom.backend.service.CouponService;
 
@@ -47,7 +49,8 @@ public class CouponAPIController {
 	@RequestMapping(value = "{userid}", method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public Boolean receiveCoupon(@PathVariable Integer couponId) {
+	@LoginRequired
+	public Boolean receiveCoupon(@PathVariable Integer couponId, @RequestHeader("token") String userToken) {
 		// TODO
 		return true;
 	}
