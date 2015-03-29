@@ -57,7 +57,6 @@ public class UserAPIController {
 	@RequestMapping(value = "/refreshToken", method = RequestMethod.PUT)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	@LoginRequired
 	public APIResult<Map<String, String>> refreshToken(@RequestHeader("token") String userToken) {
 		return generateTokenResult(userService.reLogin(userToken));
 	}
