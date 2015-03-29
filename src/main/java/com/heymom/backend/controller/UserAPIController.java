@@ -47,6 +47,13 @@ public class UserAPIController {
 		return new APIResult<Map<String, String>>(result);
 	}
 
+	@RequestMapping(value = "/login/{mobile}/{password}", method = RequestMethod.PUT)
+	@ResponseStatus(value = HttpStatus.OK)
+	@ResponseBody
+	public APIResult<Map<String, String>> login(@PathVariable String mobile, @PathVariable String password) {
+		return generateTokenResult(userService.login(mobile, password));
+	}
+
 	@RequestMapping(value = "/refreshToken", method = RequestMethod.PUT)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
