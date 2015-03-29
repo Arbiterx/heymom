@@ -84,6 +84,7 @@ public class User extends BaseEntity {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "token_create_time", length = 50)
 	public Date getTokenCreateTime() {
 		return tokenCreateTime;
 	}
