@@ -61,6 +61,7 @@ public class UserService {
 		}
 		User entity = dto.toEntity();
 		entity.setUserToken(UUID.randomUUID().toString());
+		entity.setTokenCreateTime(new Date());
 		userDao.save(entity);
 
 		return entity;
@@ -72,9 +73,11 @@ public class UserService {
 			User user = userDao.findByToken(userToken);
 			if (user == null) {
 				throw new HeymomException(100005);
-			} else {
-				currentUser.set(user);
 			}
+			if (System.currentTimeMillis() - user.getTokenCreateTime().getTime() > 86400) {
+				throw new HeymomException(100006);
+			}
+			currentUser.set(user);
 		}
 		return currentUser.get();
 	}
@@ -103,6 +106,7 @@ public class UserService {
 	private String refreshToken(User user) {
 		if (user != null) {
 			user.setUserToken(UUID.randomUUID().toString());
+			user.setTokenCreateTime(new Date());
 			userDao.save(user);
 			currentUser.set(user);
 			return user.getUserToken();

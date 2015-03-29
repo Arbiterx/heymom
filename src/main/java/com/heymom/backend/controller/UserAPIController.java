@@ -30,9 +30,7 @@ public class UserAPIController {
 	public APIResult<Map<String, String>> createUser(@PathVariable String mobile,
 			@PathVariable String verificationCode, @PathVariable String password) {
 		String userToken = userService.createUser(mobile, verificationCode, password);
-		Map<String, String> result = new HashMap<String, String>();
-		result.put("userToken", userToken);
-		return new APIResult<Map<String, String>>(result);
+		return generateTokenResult(userToken);
 	}
 
 	@RequestMapping(value = "/userinfo", method = RequestMethod.GET)
@@ -43,6 +41,20 @@ public class UserAPIController {
 		return null;
 	}
 
+	private APIResult<Map<String, String>> generateTokenResult(String userToken) {
+		Map<String, String> result = new HashMap<String, String>();
+		result.put("userToken", userToken);
+		return new APIResult<Map<String, String>>(result);
+	}
+
+	@RequestMapping(value = "/refreshToken", method = RequestMethod.PUT)
+	@ResponseStatus(value = HttpStatus.OK)
+	@ResponseBody
+	@LoginRequired
+	public APIResult<Map<String, String>> refreshToken(@RequestHeader("token") String userToken) {
+		return generateTokenResult(userService.reLogin(userToken));
+	}
+
 	@RequestMapping(value = "sendMobileVerification/{mobile}", method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
@@ -51,11 +63,12 @@ public class UserAPIController {
 		return new APIResult<Integer>(0);
 	}
 
-	@RequestMapping(value = "/{verificationCode}/{password}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/{mobile}/{verificationCode}/{password}", method = RequestMethod.PUT)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public APIResult<Integer> updatePasword(@PathVariable String verificationCode, @PathVariable String password) {
-		// TODO
+	public APIResult<Integer> updatePasword(@PathVariable String mobile, @PathVariable String verificationCode,
+			@PathVariable String password) {
+		userService.changeUserPassword(mobile, verificationCode, password);
 		return new APIResult<Integer>(0);
 	}
 

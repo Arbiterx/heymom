@@ -1,5 +1,6 @@
 package com.heymom.backend.entity.user;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -12,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.heymom.backend.entity.BaseEntity;
 import com.heymom.backend.entity.activity.ActivityAttendeeRecord;
@@ -29,6 +32,7 @@ public class User extends BaseEntity {
 	private String mobile;
 	private String name;
 	private String password;
+	private Date tokenCreateTime;
 	private UserInfo userInfo;
 	private String userToken;
 
@@ -79,6 +83,11 @@ public class User extends BaseEntity {
 		return password;
 	}
 
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date getTokenCreateTime() {
+		return tokenCreateTime;
+	}
+
 	@OneToOne
 	@PrimaryKeyJoinColumn
 	public UserInfo getUserInfo() {
@@ -124,6 +133,10 @@ public class User extends BaseEntity {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public void setTokenCreateTime(Date tokenCreateTime) {
+		this.tokenCreateTime = tokenCreateTime;
 	}
 
 	public void setUserInfo(UserInfo userInfo) {
