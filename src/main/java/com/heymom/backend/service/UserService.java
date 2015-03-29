@@ -111,7 +111,7 @@ public class UserService {
 			currentUser.set(user);
 			return user.getUserToken();
 		}
-		return null;
+		throw new HeymomException(100005);
 	}
 
 	@Transactional
