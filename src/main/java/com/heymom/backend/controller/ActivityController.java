@@ -22,8 +22,9 @@ public class ActivityController {
 			@RequestParam(defaultValue = "10") int pageSize,
 			@RequestParam(defaultValue = "createTime") String sortProperty,
 			@RequestParam(defaultValue = "DESC") String sortDirection) {
-		Page<ActivityDto> page = activityService.listAvaliableActivities(currentPage, pageSize, sortProperty,
-				sortDirection, null, null, null, null, null);
-		return new ModelAndView("list-activities", "page", page);
+		/*Page<ActivityDto> page = activityService.listAvaliableActivities(currentPage, pageSize, sortProperty,
+				sortDirection);
+		return new ModelAndView("list-activities", "page", page);*/
+		return new ModelAndView("ActivityManage");
 	}
 }

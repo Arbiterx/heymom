@@ -1,0 +1,5 @@
+com\heymom\backend\dao\MobileVerificationRecordDaoTest.class
+com\heymom\backend\dao\QuestionDaoTest.class
+com\heymom\backend\dao\DeliveryDaoTest.class
+com\heymom\backend\dao\UserDaoTest.class
+com\heymom\backend\dao\ActivityDaoTest.class
